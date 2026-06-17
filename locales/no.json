@@ -1,14 +1,22 @@
 {
   "settings": {
     "ip": {
-      "title": "KNX IP-innstillinger - Velg eller legg til et KNX IP-grensesnitt",
-      "body": "Skriv inn IP-adressen til KNX IP-grensesnittet som skal brukes. Trykk på søkeknappen for IP-grensesnitt for å søke.",
-      "singleip": "Konfigurer IP-grensesnitt",
+      "title": "KNX IP Gateway - Velg eller legg til en KNX IP Gateway",
+      "body": "Skriv inn IP-adressen til KNX IP Gateway som skal brukes. Trykk på søkeknappen for å søke.",
+      "singleip": "Konfigurer KNX IP Tunneling",
       "interfaceaddress": "Skriv inn en IPv4-adresse",
-      "searchbutton": "Søk grensesnitt",
-      "scanbutton": "(Re)Scan nettverket etter IP-grensesnitt",
+      "searchbutton": "Søk KNX IP Gateway",
+      "scanbutton": "(Re)Scan nettverket etter KNX IP Gateways",
       "manual_interface": "Manuell konfigurasjon",
-      "manual_interface_input": "skriv inn adresse manuelt"
+      "manual_interface_input": "skriv inn adresse manuelt",
+      "router_interface": "KNX IP Gateway",
+      "router_title": "KNX IP Routing (Multicast) Innstillinger",
+      "router_body": "Skriv inn multicast-adressen til KNX IP Gateway. Standard KNX multicast-adresse er 224.0.23.12.",
+      "router_legend": "Konfigurer KNX IP Routing (Multicast)",
+      "multicastaddress": "Multicast-adresse",
+      "addrouter_button": "Legg til KNX IP Gateway",
+      "existing_connection": "Bruk eksisterende tilkobling",
+      "connect_button": "Koble til"
     },
     "learnmode": {
       "title": "Start læringsmodus",

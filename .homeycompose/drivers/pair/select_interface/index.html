@@ -1,122 +1,237 @@
 <style type="text/css">
-    #interfaces-list {
-        margin-left: 0;
-        list-style: none;
-    }
-	#margin-top {
-        margin-top: 10px;
-	}
+  .gw-option {
+    border: 2px solid #d1d1d6;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+  }
+  .gw-option.active    { border-color: #006BB3; background: #eef5ff; }
+  .gw-option.gw-hidden { display: none; }
+  .gw-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .gw-header label {
+    font-weight: 500;
+    cursor: pointer;
+    flex: 1;
+  }
+  .gw-header input[type="radio"] { cursor: pointer; }
+  .gw-sub {
+    font-size: 12px;
+    color: #6e6e73;
+    margin: 4px 0 0 26px;
+  }
+  .gw-body { display: none; margin-top: 12px; }
+  .gw-option.active .gw-body { display: block; }
+  .field-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .field-row label {
+    min-width: 130px;
+    font-size: 13px;
+    color: #3c3c43;
+    flex-shrink: 0;
+  }
+  .field-row input[type="text"] {
+    flex: 1;
+    padding: 7px 10px;
+    border: 1px solid #d1d1d6;
+    border-radius: 6px;
+    font-size: 13px;
+  }
+  .gw-status { font-size: 12px; margin-top: 6px; min-height: 16px; }
+  .gw-status.ok  { color: #27ae60; }
+  .gw-status.err { color: #c0392b; }
+  .gw-status.working { color: #6e6e73; }
 </style>
 
-<ul id="interfaces-list"></ul>
-<div id="ip_input" style="display: none">
-	<h1 data-i18n="settings.ip.title">
-	</h1>
-	<p data-i18n="settings.ip.body">
-	</p>
-	<fieldset>
-		<legend data-i18n="settings.ip.singleip"></legend>
-		<div class="field row">
-			<label for="ip_address" data-i18n="settings.ip.interfaceaddress"></label>
-			<input id="ip_address" type="text" value="" />
-		</div>
-		<div id="margin-top">
-			<button id="scan_button" class="left" data-i18n="settings.ip.scanbutton"></button>
-			<button id="search_button" class="right" data-i18n="settings.ip.searchbutton"></button>
-		</div>
-	</fieldset>
+<!-- Option 1: use existing gateway -->
+<div class="gw-option" id="opt-existing">
+  <div class="gw-header">
+    <input type="radio" id="r-existing" name="gw" value="existing">
+    <label for="r-existing" id="lbl-existing"></label>
+  </div>
+  <div class="gw-sub" id="existing-detail"></div>
 </div>
 
-<script type="text/html" id="interfaces-list-template">
-	<li class="device">
-		<label for='device-{{:mac}}' class="name">
-			<div class="overlay"></div>
-			<input class="name" value="{{:name}} (IP: {{:ip}})" tabindex="-1" />
-		</label>
-		<label for='device-{{:mac}}' class="radio">
-			<input id='device-{{:mac}}' data-mac='{{:mac}}' type="radio" name="device" value="{{:mac}}"
-				   tabindex="{{:#index+1}}" />
-		</label>
-	</li>
-</script>
+<!-- Option 2: IP Tunnel -->
+<div class="gw-option" id="opt-tunnel">
+  <div class="gw-header">
+    <input type="radio" id="r-tunnel" name="gw" value="tunnel">
+    <label for="r-tunnel" id="lbl-tunnel"></label>
+  </div>
+  <div class="gw-body">
+    <div class="field-row">
+      <label id="lbl-ip"></label>
+      <input id="ip_address" type="text" placeholder="192.168.0.x" />
+    </div>
+    <div class="gw-status" id="st-tunnel"></div>
+  </div>
+</div>
+
+<!-- Option 3: IP Router (Multicast) -->
+<div class="gw-option" id="opt-router">
+  <div class="gw-header">
+    <input type="radio" id="r-router" name="gw" value="router">
+    <label for="r-router" id="lbl-router"></label>
+  </div>
+  <div class="gw-body">
+    <div class="field-row">
+      <label id="lbl-mcast"></label>
+      <input id="multicast_address" type="text" value="224.0.23.12" />
+    </div>
+    <div class="gw-status" id="st-router"></div>
+  </div>
+</div>
+
 <script>
-  Homey.setTitle(Homey.__('settings.ip.title'));
+Homey.setTitle(Homey.__('settings.ip.title'));
 
-  function renderKNXInterfaceList(interfaceList) {
-    var interfaces_render = $('#interfaces-list-template').render(interfaceList, {
-      stringify: JSON.stringify,
+// ── i18n ──────────────────────────────────────────────────────────────────────
+document.getElementById('lbl-existing').textContent = Homey.__('settings.ip.existing_connection');
+document.getElementById('lbl-tunnel').textContent   = Homey.__('settings.ip.singleip');
+document.getElementById('lbl-router').textContent   = Homey.__('settings.ip.router_legend');
+document.getElementById('lbl-ip').textContent       = Homey.__('settings.ip.interfaceaddress');
+document.getElementById('lbl-mcast').textContent    = Homey.__('settings.ip.multicastaddress');
+
+// ── State ─────────────────────────────────────────────────────────────────────
+var existingMac    = null;
+var tunnelDebounce = null;
+var routerDebounce = null;
+
+// ── Highlight active option ───────────────────────────────────────────────────
+function activateOption(optId) {
+  ['opt-existing', 'opt-tunnel', 'opt-router'].forEach(function(id) {
+    document.getElementById(id).classList.toggle('active', id === optId);
+  });
+}
+
+// ── Radio: use existing ───────────────────────────────────────────────────────
+document.getElementById('r-existing').addEventListener('change', function() {
+  activateOption('opt-existing');
+  if (existingMac) {
+    Homey.emit('selected_interface', existingMac).catch(function(e) {
+      Homey.alert(e.message || String(e));
     });
-    var $devList = $('#interfaces-list');
-    $devList.html(interfaces_render);
-    $devList.find(':radio').change(function () {
-      //console.log('selected', $(this).data('mac'));
-      if ($(this).data('mac') === '000000000000') {
-        //console.log('User selected manual IP interface');
-        $('#ip_input').css('display', 'block');
-      }
-      else {
-        //console.log('Connect to the selected interface');
-        $('#ip_input').css('display', 'none');
-        Homey.emit('selected_interface', $(this).data('mac'))
-          .catch(function (error) {
-            Homey.alert(error);
-          });
-      }
-    });
-    if ($devList.children().length) {
-      $($($devList.children()[0]).find(':radio')[0]).click();
-    }
-    else {
-      $('#ip_input').css('display', 'block');
-    }
   }
+});
 
-  Homey.emit('list_interfaces')
-    .then(function (interfaceList) {
-      interfaceList.push({
-        name: Homey.__('settings.ip.manual_interface'),
-        mac: '000000000000',
-        ip: Homey.__('settings.ip.manual_interface_input'),
-      });
-      renderKNXInterfaceList(interfaceList);
+// ── Radio: tunnel ─────────────────────────────────────────────────────────────
+document.getElementById('r-tunnel').addEventListener('change', function() {
+  activateOption('opt-tunnel');
+  // If an IP is already filled in, probe it immediately
+  var ip = document.getElementById('ip_address').value.trim();
+  if (ip) probeTunnel(ip);
+});
+
+// ── Radio: router ─────────────────────────────────────────────────────────────
+document.getElementById('r-router').addEventListener('change', function() {
+  activateOption('opt-router');
+  // Add/update router with whatever multicast address is in the field
+  var mcast = document.getElementById('multicast_address').value.trim() || '224.0.23.12';
+  addRouter(mcast);
+});
+
+// ── Tunnel: probe on blur ─────────────────────────────────────────────────────
+document.getElementById('ip_address').addEventListener('blur', function() {
+  if (document.getElementById('r-tunnel').checked) {
+    var ip = this.value.trim();
+    if (ip) probeTunnel(ip);
+  }
+});
+
+// ── Router: update on blur ────────────────────────────────────────────────────
+document.getElementById('multicast_address').addEventListener('blur', function() {
+  if (document.getElementById('r-router').checked) {
+    var mcast = this.value.trim() || '224.0.23.12';
+    addRouter(mcast);
+  }
+});
+
+// ── Probe tunnel IP ───────────────────────────────────────────────────────────
+function probeTunnel(ip) {
+  var st = document.getElementById('st-tunnel');
+  st.textContent = '…';
+  st.className   = 'gw-status working';
+  Homey.emit('manual_ip_address', ip)
+    .then(function(list) {
+      var found = null;
+      for (var i = 0; i < list.length; i++) {
+        if (list[i].mode !== 'router' && list[i].ip === ip) { found = list[i]; break; }
+      }
+      if (!found) {
+        for (var j = 0; j < list.length; j++) {
+          if (list[j].mode !== 'router') { found = list[j]; break; }
+        }
+      }
+      if (!found) throw new Error(Homey.__('errors.ip.interface_not_found'));
+      st.textContent = '✓ ' + found.name;
+      st.className   = 'gw-status ok';
+      return Homey.emit('selected_interface', found.mac);
     })
-    .catch(function (error) {
-      Homey.alert(error.message);
+    .catch(function(e) {
+      st.textContent = e.message || String(e);
+      st.className   = 'gw-status err';
     });
+}
 
-  var $scanButton = $('#scan_button');
-  $scanButton.on('click', function () {
-    $scanButton.attr('disabled', 'disabled');
-    Homey.emit('search_interfaces')
-	  .then (function (interfaceList) {
-        interfaceList.push({
-          name: Homey.__('settings.ip.manual_interface'),
-          mac: '000000000000',
-          ip: Homey.__('settings.ip.manual_interface_input'),
-        });
-        renderKNXInterfaceList(interfaceList);
-        $scanButton.removeAttr('disabled');
-	  })
-    .catch(function (error) {
-      $scanButton.removeAttr('disabled');
-      return Homey.alert(error.message);
+// ── Add / update router ───────────────────────────────────────────────────────
+function addRouter(mcast) {
+  var st = document.getElementById('st-router');
+  st.textContent = '…';
+  st.className   = 'gw-status working';
+  Homey.emit('add_router_interface', mcast)
+    .then(function(list) {
+      var found = null;
+      for (var i = 0; i < list.length; i++) {
+        if (list[i].mode === 'router') { found = list[i]; break; }
+      }
+      if (!found) throw new Error(Homey.__('errors.ip.interface_not_found'));
+      st.textContent = '✓ ' + found.name;
+      st.className   = 'gw-status ok';
+      return Homey.emit('selected_interface', found.mac);
+    })
+    .catch(function(e) {
+      st.textContent = e.message || String(e);
+      st.className   = 'gw-status err';
     });
-  });
+}
 
-  var $ipInput = $('#ip_address');
-  var $searchButton = $('#search_button');
+// ── Init: load existing gateway ───────────────────────────────────────────────
+Homey.emit('list_interfaces').then(function(list) {
+  var existing = (list && list.length > 0) ? list[0] : null;
+  if (existing) {
+    existingMac = existing.mac;
+    var modeStr = existing.mode === 'router'
+      ? 'KNX Router (' + (existing.multicastAddress || '224.0.23.12') + ')'
+      : 'KNX Tunnel (' + (existing.ip || '') + ')';
+    document.getElementById('existing-detail').textContent = existing.name + ' — ' + modeStr;
 
-  $searchButton.on('click', function () {
-    $searchButton.attr('disabled', 'disabled');
-    Homey.emit('manual_ip_address', $ipInput.val())
-      .then(function (interfaceList) {
-        renderKNXInterfaceList(interfaceList);
-        $searchButton.removeAttr('disabled');
-      })
-      .catch(function (error) {
-        console.log(error);
-        Homey.alert(error.message);
-        $searchButton.removeAttr('disabled');
-      });
-  });
+    // Pre-fill only the field that matches the existing gateway's mode
+    if (existing.mode === 'tunnel' && existing.ip) {
+      document.getElementById('ip_address').value = existing.ip;
+    }
+    if (existing.multicastAddress) {
+      document.getElementById('multicast_address').value = existing.multicastAddress;
+    }
+
+    // Default: use existing — pre-select it so Next works immediately
+    document.getElementById('r-existing').checked = true;
+    activateOption('opt-existing');
+    Homey.emit('selected_interface', existingMac).catch(function() {});
+  } else {
+    // No gateway yet — hide existing option, default to tunnel
+    document.getElementById('opt-existing').classList.add('gw-hidden');
+    document.getElementById('r-tunnel').checked = true;
+    activateOption('opt-tunnel');
+  }
+}).catch(function() {
+  document.getElementById('opt-existing').classList.add('gw-hidden');
+  document.getElementById('r-tunnel').checked = true;
+  activateOption('opt-tunnel');
+});
 </script>

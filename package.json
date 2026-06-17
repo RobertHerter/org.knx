@@ -1,6 +1,6 @@
 {
   "name": "org.knx",
-  "version": "1.2.4",
+  "version": "2.0.0",
   "description": "Add KNX based devices to Homey.",
   "main": "app.js",
   "dependencies": {

@@ -1,14 +1,22 @@
 {
     "settings": {
         "ip": {
-            "title": "KNX IP instellingen",
-            "body": "Vul het IP adres in van de te gebruiken KNX IP interface. Druk daarna op zoek interface om deze te controleren.",
-            "singleip": "Configureer IP Interface",
+            "title": "KNX IP Gateway - KNX IP Gateway selecteren of toevoegen",
+            "body": "Vul het IP adres in van de te gebruiken KNX IP Gateway. Druk op de zoekknop om te zoeken.",
+            "singleip": "KNX IP Tunneling configureren",
             "interfaceaddress": "Vul het IPv4 adres van de IP interface in.",
-            "searchbutton": "Zoek interface",
-            "scanbutton": "Scan het netwerk voor IP interfaces",
+            "searchbutton": "Zoek KNX IP Gateway",
+            "scanbutton": "Scan het netwerk voor KNX IP Gateways",
             "manual_interface": "Handmatige configuratie",
-            "manual_interface_input": "vul handmatig een adres in."
+            "manual_interface_input": "vul handmatig een adres in.",
+            "router_interface": "KNX IP Gateway",
+            "router_title": "KNX IP Routing (Multicast) instellingen",
+            "router_body": "Vul het multicast adres van de KNX IP Gateway in. Het standaard KNX multicast adres is 224.0.23.12.",
+            "router_legend": "KNX IP Routing (Multicast) configureren",
+            "multicastaddress": "Multicast adres",
+            "addrouter_button": "KNX IP Gateway toevoegen",
+            "existing_connection": "Bestaande verbinding gebruiken",
+            "connect_button": "Verbinden"
         },
         "learnmode": {
             "title" : "Inleermodus",

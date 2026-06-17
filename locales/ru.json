@@ -1,14 +1,22 @@
 {
   "settings": {
     "ip": {
-      "title": "Настройки KNX IP - Выбрать или добавить интерфейс KNX IP",
-      "body": "Введите IP-адрес интерфейса KNX IP. Нажмите кнопку поиска IP-интерфейса, чтобы начать поиск.",
-      "singleip": "Настроить IP Интерфейс",
+      "title": "Шлюз KNX IP - Выбрать или добавить шлюз KNX IP",
+      "body": "Введите IP-адрес шлюза KNX IP. Нажмите кнопку поиска, чтобы начать поиск.",
+      "singleip": "Настроить KNX IP Tunneling",
       "interfaceaddress": "Введите IPv4 адрес",
-      "searchbutton": "Поиск интерфейса",
-      "scanbutton": "(Повторно) Сканировать сеть на наличие IP-интерфейсов",
+      "searchbutton": "Поиск шлюза KNX IP",
+      "scanbutton": "(Повторно) Сканировать сеть на наличие шлюзов KNX IP",
       "manual_interface": "Ручная конфигурация",
-      "manual_interface_input": "введите адрес вручную"
+      "manual_interface_input": "введите адрес вручную",
+      "router_interface": "Шлюз KNX IP",
+      "router_title": "Настройки KNX IP Routing (Multicast)",
+      "router_body": "Введите мультикаст-адрес шлюза KNX IP. Стандартный мультикаст-адрес KNX: 224.0.23.12.",
+      "router_legend": "Настроить KNX IP Routing (Multicast)",
+      "multicastaddress": "Мультикаст-адрес",
+      "addrouter_button": "Добавить шлюз KNX IP",
+      "existing_connection": "Использовать существующее подключение",
+      "connect_button": "Подключить"
     },
     "learnmode": {
       "title": "Запустить режим обучения",

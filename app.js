@@ -54,6 +54,23 @@ class KNXApp extends Homey.App {
     this.KNXInterfaceFoundHandler = this.onKNXInterface.bind(this);
     this.knxInterfaceManager.on('interface_found', this.KNXInterfaceFoundHandler);
 
+    // React to changes written by the settings page via Homey.set()
+    this.homey.settings.on('set', (key) => {
+      if (key === 'interfaceSettings') {
+        this.knxInterfaceManager.applyInterfaceSettings();
+      }
+      if (key === 'macAliases') {
+        this.knxInterfaceManager.applyMacAliases();
+      }
+      if (key === 'deleteInterface') {
+        const mac = this.homey.settings.get('deleteInterface');
+        if (mac) {
+          this.knxInterfaceManager.deleteInterface(mac);
+          this.homey.settings.set('deleteInterface', null);
+        }
+      }
+    });
+
     const hvacOperatingModeChangedTrigger = this.homey.flow.getDeviceTriggerCard('hvac_operating_mode_changed');
     hvacOperatingModeChangedTrigger.registerRunListener(async (args, state) => {
       return args.hvac_operating_mode === 'Any' || args.device.getCapabilityValue('hvac_operating_mode') === args.hvac_operating_mode;
@@ -278,6 +295,19 @@ class KNXApp extends Homey.App {
    */
   getKNXInterfaceManager() {
     return this.knxInterfaceManager;
+  }
+
+  // ────────── Settings page API handlers ──────────
+
+  async onGetInterfaces({ homey, query }) {
+    return this.knxInterfaceManager.getInterfacesWithSettings();
+  }
+
+  async onSetInterfaceMode({ homey, body }) {
+    const { mac, mode, multicastAddress, ipAddress } = body;
+    if (!mac || !mode) throw new Error('missing_params');
+    this.knxInterfaceManager.setInterfaceMode(mac, mode, multicastAddress, null, ipAddress);
+    return { ok: true };
   }
 
   // Obtain the interface to use by MAC address, then start the learnmode on it.

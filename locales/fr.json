@@ -1,14 +1,22 @@
 {
   "settings": {
     "ip": {
-      "title": "Paramètres IP KNX - Sélectionnez ou ajoutez une interface IP KNX",
-      "body": "Entrez l'adresse IP de l'interface KNX IP à utiliser. Appuyez sur le bouton de recherche d'interface IP pour rechercher.",
-      "singleip": "Configurer l'interface IP",
+      "title": "Passerelle IP KNX - Sélectionnez ou ajoutez une passerelle IP KNX",
+      "body": "Entrez l'adresse IP de la passerelle KNX IP à utiliser. Appuyez sur le bouton de recherche pour rechercher.",
+      "singleip": "Configurer KNX IP Tunneling",
       "interfaceaddress": "Entrez une adresse IPv4",
-      "searchbutton": "Rechercher une interface",
-      "scanbutton": "(Re)Scanner le réseau pour les interfaces IP",
+      "searchbutton": "Rechercher une passerelle KNX IP",
+      "scanbutton": "(Re)Scanner le réseau pour les passerelles KNX IP",
       "manual_interface": "Configuration manuelle",
-      "manual_interface_input": "saisir l'adresse manuellement"
+      "manual_interface_input": "saisir l'adresse manuellement",
+      "router_interface": "Passerelle KNX IP",
+      "router_title": "Paramètres KNX IP Routing (Multicast)",
+      "router_body": "Entrez l'adresse multicast de la passerelle KNX IP. L'adresse multicast KNX par défaut est 224.0.23.12.",
+      "router_legend": "Configurer KNX IP Routing (Multicast)",
+      "multicastaddress": "Adresse multicast",
+      "addrouter_button": "Ajouter une passerelle KNX IP",
+      "existing_connection": "Utiliser la connexion existante",
+      "connect_button": "Connecter"
     },
     "learnmode": {
       "title": "Démarrer le mode d'apprentissage",

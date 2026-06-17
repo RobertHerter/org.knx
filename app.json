@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "org.knx",
-  "version": "1.5.2",
+  "version": "2.0.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#006BB3",
@@ -51,6 +51,18 @@
   },
   "support": "https://github.com/athombv/org.knx/issues",
   "source": "https://github.com/athombv/org.knx",
+  "api": [
+    {
+      "method": "GET",
+      "path": "/interfaces",
+      "id": "getInterfaces"
+    },
+    {
+      "method": "POST",
+      "path": "/setInterfaceMode",
+      "id": "setInterfaceMode"
+    }
+  ],
   "flow": {
     "triggers": [
       {

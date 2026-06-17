@@ -1,14 +1,22 @@
 {
   "settings": {
     "ip": {
-      "title": "KNX IP Einstellungen - Wählen oder fügen Sie eine KNX IP-Schnittstelle hinzu",
-      "body": "Geben Sie die IP-Adresse der zu verwendenden KNX IP-Schnittstelle ein. Drücken Sie die Schaltfläche IP-Schnittstelle suchen, um zu suchen.",
-      "singleip": "IP-Schnittstelle konfigurieren",
+      "title": "KNX IP Gateway - KNX IP Gateway auswählen oder hinzufügen",
+      "body": "Geben Sie die IP-Adresse des zu verwendenden KNX IP Gateways ein. Drücken Sie die Schaltfläche Suchen, um zu suchen.",
+      "singleip": "KNX IP Tunneling konfigurieren",
       "interfaceaddress": "Geben Sie eine IPv4-Adresse ein",
-      "searchbutton": "Schnittstelle suchen",
-      "scanbutton": "(Erneut) das Netzwerk nach IP-Schnittstellen scannen",
+      "searchbutton": "KNX IP Gateway suchen",
+      "scanbutton": "(Erneut) das Netzwerk nach KNX IP Gateways scannen",
       "manual_interface": "Manuelle Konfiguration",
-      "manual_interface_input": "Adresse manuell eingeben"
+      "manual_interface_input": "Adresse manuell eingeben",
+      "router_interface": "KNX IP Gateway",
+      "router_title": "KNX IP Routing (Multicast) Einstellungen",
+      "router_body": "Geben Sie die Multicast-Adresse des KNX IP Gateways ein. Die Standard-KNX-Multicast-Adresse ist 224.0.23.12.",
+      "router_legend": "KNX IP Routing (Multicast) konfigurieren",
+      "multicastaddress": "Multicast-Adresse",
+      "addrouter_button": "KNX IP Gateway hinzufügen",
+      "existing_connection": "Bestehende Verbindung verwenden",
+      "connect_button": "Verbinden"
     },
     "learnmode": {
       "title": "Lernmodus starten",

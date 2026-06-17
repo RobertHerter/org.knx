@@ -1,14 +1,22 @@
 {
   "settings": {
     "ip": {
-      "title": "إعدادات KNX IP - اختر أو أضف واجهة KNX IP",
-      "body": "أدخل عنوان IP من واجهة KNX IP التي ترغب في استخدامها. اضغط على زر البحث عن واجهة IP للبحث عنها.",
-      "singleip": "تكوين واجهة IP",
+      "title": "بوابة KNX IP - اختر أو أضف بوابة KNX IP",
+      "body": "أدخل عنوان IP لبوابة KNX IP التي ترغب في استخدامها. اضغط على زر البحث للبحث.",
+      "singleip": "تكوين KNX IP Tunneling",
       "interfaceaddress": "أدخل عنوان IPv4",
-      "searchbutton": "ابحث عن الواجهة",
-      "scanbutton": "فحص (مرة أخرى) الشبكة للبحث عن واجهات IP",
+      "searchbutton": "ابحث عن بوابة KNX IP",
+      "scanbutton": "فحص (مرة أخرى) الشبكة للبحث عن بوابات KNX IP",
       "manual_interface": "التكوين اليدوي",
-      "manual_interface_input": "أدخل العنوان يدويًا"
+      "manual_interface_input": "أدخل العنوان يدويًا",
+      "router_interface": "بوابة KNX IP",
+      "router_title": "إعدادات KNX IP Routing (Multicast)",
+      "router_body": "أدخل عنوان الـ multicast لبوابة KNX IP. عنوان الـ multicast الافتراضي لـ KNX هو 224.0.23.12.",
+      "router_legend": "تكوين KNX IP Routing (Multicast)",
+      "multicastaddress": "عنوان Multicast",
+      "addrouter_button": "أضف بوابة KNX IP",
+      "existing_connection": "استخدام الاتصال الحالي",
+      "connect_button": "اتصال"
     },
     "learnmode": {
       "title": "بدء وضع التعلم",

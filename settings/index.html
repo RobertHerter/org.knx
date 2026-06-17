@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KNX</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 14px;
+      color: #1c1c1e;
+      background: #f2f2f7;
+      padding: 16px;
+    }
+
+    h1 { font-size: 17px; font-weight: 600; margin-bottom: 16px; }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.08);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+
+    .card-title { font-weight: 600; font-size: 15px; flex: 1; }
+    .card-meta  { font-size: 12px; color: #6e6e73; margin-bottom: 14px; }
+
+    .field { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .field label { min-width: 130px; font-size: 13px; color: #3c3c43; flex-shrink: 0; }
+    .field select,
+    .field input[type="text"] {
+      flex: 1; padding: 7px 10px;
+      border: 1px solid #d1d1d6; border-radius: 8px;
+      font-size: 13px; background: #fff;
+    }
+
+    .field-multicast         { display: none; }
+    .field-multicast.visible { display: flex; }
+    .field-tunnel            { display: none; }
+    .field-tunnel.visible    { display: flex; }
+
+    .btn-row { display: flex; gap: 8px; margin-top: 12px; }
+
+    .btn-save {
+      flex: 1;
+      padding: 8px 16px;
+      border: none; border-radius: 8px;
+      font-size: 14px; font-weight: 500; cursor: pointer;
+      background: #006BB3; color: #fff;
+    }
+    .btn-save:disabled { opacity: 0.5; cursor: default; }
+
+    .feedback { font-size: 12px; text-align: center; margin-top: 6px; min-height: 16px; }
+    .empty    { text-align: center; color: #6e6e73; padding: 40px 20px; }
+  </style>
+</head>
+<body>
+
+<h1 id="ttl">KNX Gateway Configuration</h1>
+<div id="list"><div class="empty" id="loading">Loading…</div></div>
+
+<script type="text/javascript" src="/homey.js" data-origin="settings"></script>
+<script>
+// ── i18n ─────────────────────────────────────────────────────────────────────
+var T = {
+  title:   'KNX IP Gateway Configuration',
+  tunnel:  'KNX IP Tunneling',
+  router:  'KNX IP Routing (Multicast)',
+  mode:    'Mode',
+  maddr:   'Multicast Address',
+  knxaddr: 'KNX Address',
+  save:    'Save',
+  saved:   '✓ Saved',
+  err:     'Error: ',
+  none:    'No KNX IP Gateway configured. Add a device to set up the connection.',
+  name:    'Name',
+  nameplh: 'KNX IP Gateway',
+  ipaddr:  'IP Address',
+};
+if (navigator.language && navigator.language.startsWith('de')) {
+  T.title   = 'KNX IP Gateway Konfiguration';
+  T.mode    = 'Modus';
+  T.maddr   = 'Multicast-Adresse';
+  T.knxaddr = 'KNX-Adresse';
+  T.save    = 'Speichern';
+  T.saved   = '✓ Gespeichert';
+  T.none    = 'Kein KNX IP Gateway konfiguriert. Gerät hinzufügen um die Verbindung einzurichten.';
+  T.ipaddr  = 'IP-Adresse';
+}
+document.getElementById('ttl').textContent = T.title;
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function esc(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+function cid(mac) { return mac.replace(/[:\-]/g, '_'); }
+
+// ── State ─────────────────────────────────────────────────────────────────────
+var currentInterfaces = [];
+var currentSettings   = {};
+
+// ── Render ────────────────────────────────────────────────────────────────────
+function render(interfaces, settings) {
+  currentInterfaces = interfaces || [];
+  currentSettings   = settings  || {};
+
+  var list = document.getElementById('list');
+  if (!currentInterfaces.length) {
+    list.innerHTML = '<div class="empty">' + T.none + '</div>';
+    return;
+  }
+
+  list.innerHTML = currentInterfaces.map(function(iface) {
+    var s         = currentSettings[iface.mac] || {};
+    var mode      = s.mode || iface.mode || 'tunnel';
+    var multicast = s.multicastAddress || iface.multicastAddress || '224.0.23.12';
+    var knxAddr   = s.knxAddress || iface.knxAddress || '';
+    var ipAddr    = s.ipAddress  || iface.ip          || '';
+    var cardId    = cid(iface.mac);
+    var dispName  = s.name || iface.name || 'KNX Gateway';
+
+    return [
+      '<div class="card" id="card-' + cardId + '">',
+      '  <div class="card-header">',
+      '    <span class="card-title">' + esc(dispName) + '</span>',
+      '  </div>',
+      '  <div class="card-meta">MAC: ' + esc(iface.mac) + '</div>',
+      '  <div class="field">',
+      '    <label>' + T.name + '</label>',
+      '    <input type="text" id="name-' + cardId + '" value="' + esc(s.name || '') + '" placeholder="' + esc(T.nameplh) + '">',
+      '  </div>',
+      '  <div class="field">',
+      '    <label>' + T.knxaddr + '</label>',
+      '    <input type="text" id="knx-' + cardId + '" value="' + esc(knxAddr) + '" placeholder="15.15.15">',
+      '  </div>',
+      '  <div class="field">',
+      '    <label>' + T.mode + '</label>',
+      '    <select id="mode-' + cardId + '" onchange="toggleFields(\'' + esc(iface.mac) + '\',this.value)">',
+      '      <option value="tunnel"' + (mode === 'tunnel' ? ' selected' : '') + '>' + T.tunnel + '</option>',
+      '      <option value="router"' + (mode === 'router' ? ' selected' : '') + '>' + T.router + '</option>',
+      '    </select>',
+      '  </div>',
+      '  <div class="field field-tunnel' + (mode === 'tunnel' ? ' visible' : '') + '" id="tunnel-' + cardId + '">',
+      '    <label>' + T.ipaddr + '</label>',
+      '    <input type="text" id="ip-' + cardId + '" value="' + esc(ipAddr) + '" placeholder="192.168.0.100">',
+      '  </div>',
+      '  <div class="field field-multicast' + (mode === 'router' ? ' visible' : '') + '" id="mcast-' + cardId + '">',
+      '    <label>' + T.maddr + '</label>',
+      '    <input type="text" id="maddr-' + cardId + '" value="' + esc(multicast) + '" placeholder="224.0.23.12">',
+      '  </div>',
+      '  <div class="btn-row">',
+      '    <button class="btn-save" onclick="doSave(\'' + esc(iface.mac) + '\')">' + T.save + '</button>',
+      '  </div>',
+      '  <div class="feedback" id="fb-' + cardId + '"></div>',
+      '</div>',
+    ].join('\n');
+  }).join('\n');
+}
+
+// ── Load ──────────────────────────────────────────────────────────────────────
+var H;
+
+function load() {
+  H.get('interfaces', function(err, interfaces) {
+    H.get('interfaceSettings', function(err2, settings) {
+      var ifaces = interfaces || [];
+      render(ifaces, settings);
+      // Ensure the first gateway is always the global active one
+      if (ifaces.length > 0) {
+        H.get('selectedInterface', function(err3, activeMac) {
+          if (!activeMac) {
+            H.set('selectedInterface', ifaces[0].mac, function() {});
+          }
+        });
+      }
+    });
+  });
+}
+
+// ── Mode toggle ───────────────────────────────────────────────────────────────
+function toggleFields(mac, mode) {
+  var cardId    = cid(mac);
+  var mcastRow  = document.getElementById('mcast-'  + cardId);
+  var tunnelRow = document.getElementById('tunnel-' + cardId);
+  if (mode === 'router') {
+    mcastRow.classList.add('visible');
+    tunnelRow.classList.remove('visible');
+  } else {
+    mcastRow.classList.remove('visible');
+    tunnelRow.classList.add('visible');
+  }
+}
+
+// ── Save ──────────────────────────────────────────────────────────────────────
+function doSave(mac) {
+  var cardId     = cid(mac);
+  var nameEl     = document.getElementById('name-'  + cardId);
+  var customName = nameEl ? nameEl.value.trim() : '';
+  var knxAddr    = (document.getElementById('knx-'   + cardId).value || '').trim();
+  var mode       = document.getElementById('mode-'  + cardId).value;
+  var ipEl       = document.getElementById('ip-'    + cardId);
+  var ipAddr     = ipEl ? ipEl.value.trim() : '';
+  var maddrEl    = document.getElementById('maddr-' + cardId);
+  var multicast  = maddrEl ? maddrEl.value.trim() : '224.0.23.12';
+  var fb         = document.getElementById('fb-' + cardId);
+  var btn        = document.querySelector('#card-' + cardId + ' .btn-save');
+
+  btn.disabled   = true;
+  fb.textContent = '';
+
+  H.get('interfaceSettings', function(err, current) {
+    var updated = current || {};
+    updated[mac] = {
+      name:             customName || null,
+      mode:             mode,
+      multicastAddress: multicast,
+      knxAddress:       knxAddr || null,
+      ipAddress:        ipAddr  || null,
+    };
+    H.set('interfaceSettings', updated, function(err2) {
+      btn.disabled = false;
+      if (err2) {
+        fb.style.color = '#c0392b';
+        fb.textContent = T.err + (err2.message || err2);
+      } else {
+        // Also ensure this gateway is set as globally active
+        H.set('selectedInterface', mac, function() {});
+        fb.style.color = '#006BB3';
+        fb.textContent = T.saved;
+        setTimeout(function() { fb.textContent = ''; }, 3000);
+      }
+    });
+  });
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+function onHomeyReady(Homey) {
+  H = Homey;
+  Homey.ready();
+  load();
+}
+</script>
+</body>
+</html>

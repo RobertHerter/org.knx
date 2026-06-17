@@ -1,14 +1,22 @@
 {
   "settings": {
     "ip": {
-      "title": "Ustawienia KNX IP - Wybierz lub dodaj interfejs KNX IP",
-      "body": "Wprowadź adres IP z interfejsu KNX IP do użycia. Naciśnij przycisk wyszukiwania interfejsu IP, aby wyszukać.",
-      "singleip": "Konfiguruj interfejs IP",
+      "title": "Bramka KNX IP - Wybierz lub dodaj bramkę KNX IP",
+      "body": "Wprowadź adres IP bramki KNX IP do użycia. Naciśnij przycisk wyszukiwania, aby wyszukać.",
+      "singleip": "Konfiguruj KNX IP Tunneling",
       "interfaceaddress": "Wprowadź adres IPv4",
-      "searchbutton": "Szukaj interfejsu",
-      "scanbutton": "Skanuj ponownie sieć w poszukiwaniu interfejsów IP",
+      "searchbutton": "Szukaj bramki KNX IP",
+      "scanbutton": "Skanuj ponownie sieć w poszukiwaniu bramek KNX IP",
       "manual_interface": "Ręczna konfiguracja",
-      "manual_interface_input": "wprowadź adres ręcznie"
+      "manual_interface_input": "wprowadź adres ręcznie",
+      "router_interface": "Bramka KNX IP",
+      "router_title": "Ustawienia KNX IP Routing (Multicast)",
+      "router_body": "Wprowadź adres multicast bramki KNX IP. Domyślny adres multicast KNX to 224.0.23.12.",
+      "router_legend": "Konfiguruj KNX IP Routing (Multicast)",
+      "multicastaddress": "Adres multicast",
+      "addrouter_button": "Dodaj bramkę KNX IP",
+      "existing_connection": "Użyj istniejącego połączenia",
+      "connect_button": "Połącz"
     },
     "learnmode": {
       "title": "Rozpocznij tryb nauki",

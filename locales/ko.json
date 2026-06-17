@@ -1,14 +1,22 @@
 {
   "settings": {
     "ip": {
-      "title": "KNX IP 설정 - KNX IP 인터페이스 선택 또는 추가",
-      "body": "사용할 KNX IP 인터페이스의 IP 주소를 입력하세요. IP 인터페이스 검색 버튼을 눌러 검색하세요.",
-      "singleip": "IP 인터페이스 설정",
+      "title": "KNX IP 게이트웨이 - KNX IP 게이트웨이 선택 또는 추가",
+      "body": "사용할 KNX IP 게이트웨이의 IP 주소를 입력하세요. 검색 버튼을 눌러 검색하세요.",
+      "singleip": "KNX IP 터널링 설정",
       "interfaceaddress": "IPv4 주소 입력",
-      "searchbutton": "인터페이스 검색",
-      "scanbutton": "네트워크에서 IP 인터페이스 재검색",
+      "searchbutton": "KNX IP 게이트웨이 검색",
+      "scanbutton": "네트워크에서 KNX IP 게이트웨이 재검색",
       "manual_interface": "수동 설정",
-      "manual_interface_input": "주소 수동 입력"
+      "manual_interface_input": "주소 수동 입력",
+      "router_interface": "KNX IP 게이트웨이",
+      "router_title": "KNX IP 라우팅 (멀티캐스트) 설정",
+      "router_body": "KNX IP 게이트웨이의 멀티캐스트 주소를 입력하세요. 기본 KNX 멀티캐스트 주소는 224.0.23.12입니다.",
+      "router_legend": "KNX IP 라우팅 (멀티캐스트) 구성",
+      "multicastaddress": "멀티캐스트 주소",
+      "addrouter_button": "KNX IP 게이트웨이 추가",
+      "existing_connection": "기존 연결 사용",
+      "connect_button": "연결"
     },
     "learnmode": {
       "title": "학습 모드 시작",

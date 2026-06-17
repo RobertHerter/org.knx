@@ -21,6 +21,7 @@
         {
           "id": "macAddress",
           "type": "text",
+          "readonly": true,
           "label": {
             "en": "Interface MAC address",
             "nl": "Interface MAC adres",
@@ -56,6 +57,7 @@
         {
           "id": "ipAddress",
           "type": "text",
+          "readonly": true,
           "label": {
             "en": "Interface IP address",
             "nl": "Interface IP adres",
