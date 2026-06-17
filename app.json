@@ -1494,7 +1494,7 @@
           "children": [
             {
               "id": "macAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface MAC address",
                 "nl": "Interface MAC adres",
@@ -1509,7 +1509,6 @@
                 "ru": "MAC-адрес интерфейса",
                 "ko": "인터페이스 MAC 주소"
               },
-              "value": "",
               "hint": {
                 "en": "MAC address of the required KNX IP interface",
                 "nl": "MAC adres van de KNX IP interface",
@@ -1527,7 +1526,7 @@
             },
             {
               "id": "ipAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface IP address",
                 "nl": "Interface IP adres",
@@ -1542,7 +1541,6 @@
                 "ru": "IP-адрес интерфейса",
                 "ko": "인터페이스 IP 주소"
               },
-              "value": "",
               "hint": {
                 "en": "IP address of the required KNX IP interface",
                 "nl": "IP adres van de KNX IP interface",
@@ -1933,7 +1931,7 @@
           "children": [
             {
               "id": "macAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface MAC address",
                 "nl": "Interface MAC adres",
@@ -1949,7 +1947,6 @@
                 "ko": "인터페이스 MAC 주소",
                 "ar": "عنوان MAC للواجهة"
               },
-              "value": "",
               "hint": {
                 "en": "MAC address of the required KNX IP interface",
                 "nl": "MAC adres van de KNX IP interface",
@@ -1968,7 +1965,7 @@
             },
             {
               "id": "ipAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface IP address",
                 "nl": "Interface IP adres",
@@ -1984,7 +1981,6 @@
                 "ko": "인터페이스 IP 주소",
                 "ar": "عنوان IP للواجهة"
               },
-              "value": "",
               "hint": {
                 "en": "IP address of the required KNX IP interface",
                 "nl": "IP adres van de KNX IP interface",
@@ -2276,7 +2272,7 @@
           "children": [
             {
               "id": "macAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface MAC address",
                 "nl": "Interface MAC adres",
@@ -2292,7 +2288,6 @@
                 "ko": "인터페이스 MAC 주소",
                 "ar": "عنوان MAC للواجهة"
               },
-              "value": "",
               "hint": {
                 "en": "MAC address of the required KNX IP interface",
                 "nl": "MAC adres van de KNX IP interface",
@@ -2311,7 +2306,7 @@
             },
             {
               "id": "ipAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface IP address",
                 "nl": "Interface IP adres",
@@ -2327,7 +2322,6 @@
                 "ko": "인터페이스 IP 주소",
                 "ar": "عنوان IP للواجهة"
               },
-              "value": "",
               "hint": {
                 "en": "IP address of the required KNX IP interface",
                 "nl": "IP adres van de KNX IP interface",
@@ -2478,7 +2472,7 @@
           "children": [
             {
               "id": "macAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface MAC address",
                 "nl": "Interface MAC adres",
@@ -2494,7 +2488,6 @@
                 "ko": "인터페이스 MAC 주소",
                 "ar": "عنوان MAC للواجهة"
               },
-              "value": "",
               "hint": {
                 "en": "MAC address of the required KNX IP interface",
                 "nl": "MAC adres van de KNX IP interface",
@@ -2513,7 +2506,7 @@
             },
             {
               "id": "ipAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface IP address",
                 "nl": "Interface IP adres",
@@ -2529,7 +2522,6 @@
                 "ko": "인터페이스 IP 주소",
                 "ar": "عنوان IP للواجهة"
               },
-              "value": "",
               "hint": {
                 "en": "IP address of the required KNX IP interface",
                 "nl": "IP adres van de KNX IP interface",
@@ -2680,7 +2672,7 @@
           "children": [
             {
               "id": "macAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface MAC address",
                 "nl": "Interface MAC adres",
@@ -2696,7 +2688,6 @@
                 "ko": "인터페이스 MAC 주소",
                 "ar": "عنوان MAC للواجهة"
               },
-              "value": "",
               "hint": {
                 "en": "MAC address of the required KNX IP interface",
                 "nl": "MAC adres van de KNX IP interface",
@@ -2715,7 +2706,7 @@
             },
             {
               "id": "ipAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface IP address",
                 "nl": "Interface IP adres",
@@ -2731,7 +2722,6 @@
                 "ko": "인터페이스 IP 주소",
                 "ar": "عنوان IP للواجهة"
               },
-              "value": "",
               "hint": {
                 "en": "IP address of the required KNX IP interface",
                 "nl": "IP adres van de KNX IP interface",
@@ -2884,7 +2874,7 @@
           "children": [
             {
               "id": "macAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface MAC address",
                 "nl": "Interface MAC adres",
@@ -2900,7 +2890,6 @@
                 "ko": "인터페이스 MAC 주소",
                 "ar": "عنوان واجهة MAC"
               },
-              "value": "",
               "hint": {
                 "en": "MAC address of the required KNX IP interface",
                 "nl": "MAC adres van de KNX IP interface",
@@ -2919,7 +2908,7 @@
             },
             {
               "id": "ipAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface IP address",
                 "nl": "Interface IP adres",
@@ -2935,7 +2924,6 @@
                 "ko": "인터페이스 IP 주소",
                 "ar": "عنوان واجهة IP"
               },
-              "value": "",
               "hint": {
                 "en": "IP address of the required KNX IP interface",
                 "nl": "IP adres van de KNX IP interface",
@@ -3122,7 +3110,7 @@
           "children": [
             {
               "id": "macAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface MAC address",
                 "nl": "Interface MAC adres",
@@ -3138,7 +3126,6 @@
                 "ko": "인터페이스 MAC 주소",
                 "ar": "عنوان MAC للواجهة"
               },
-              "value": "",
               "hint": {
                 "en": "MAC address of the required KNX IP interface",
                 "nl": "MAC adres van de KNX IP interface",
@@ -3157,7 +3144,7 @@
             },
             {
               "id": "ipAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface IP address",
                 "nl": "Interface IP adres",
@@ -3173,7 +3160,6 @@
                 "ko": "인터페이스 IP 주소",
                 "ar": "عنوان IP للواجهة"
               },
-              "value": "",
               "hint": {
                 "en": "IP address of the required KNX IP interface",
                 "nl": "IP adres van de KNX IP interface",
@@ -3325,7 +3311,7 @@
           "children": [
             {
               "id": "macAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface MAC address",
                 "nl": "Interface MAC adres",
@@ -3341,7 +3327,6 @@
                 "ko": "인터페이스 MAC 주소",
                 "ar": "عنوان MAC للواجهة"
               },
-              "value": "",
               "hint": {
                 "en": "MAC address of the required KNX IP interface",
                 "nl": "MAC adres van de KNX IP interface",
@@ -3360,7 +3345,7 @@
             },
             {
               "id": "ipAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface IP address",
                 "nl": "Interface IP adres",
@@ -3376,7 +3361,6 @@
                 "ko": "인터페이스 IP 주소",
                 "ar": "عنوان IP للواجهة"
               },
-              "value": "",
               "hint": {
                 "en": "IP address of the required KNX IP interface",
                 "nl": "IP adres van de KNX IP interface",
@@ -3524,7 +3508,7 @@
           "children": [
             {
               "id": "macAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface MAC address",
                 "nl": "Interface MAC adres",
@@ -3539,7 +3523,6 @@
                 "ru": "MAC-адрес интерфейса",
                 "ko": "인터페이스 MAC 주소"
               },
-              "value": "",
               "hint": {
                 "en": "MAC address of the required KNX IP interface",
                 "nl": "MAC adres van de KNX IP interface",
@@ -3557,7 +3540,7 @@
             },
             {
               "id": "ipAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface IP address",
                 "nl": "Interface IP adres",
@@ -3572,7 +3555,6 @@
                 "ru": "IP-адрес интерфейса",
                 "ko": "인터페이스 IP 주소"
               },
-              "value": "",
               "hint": {
                 "en": "IP address of the required KNX IP interface",
                 "nl": "IP adres van de KNX IP interface",
@@ -3814,12 +3796,11 @@
           "children": [
             {
               "id": "macAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface MAC address",
                 "nl": "Interface MAC adres"
               },
-              "value": "",
               "hint": {
                 "en": "MAC address of the required KNX IP interface",
                 "nl": "MAC adres van de KNX IP interface"
@@ -3827,12 +3808,11 @@
             },
             {
               "id": "ipAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface IP address",
                 "nl": "Interface IP adres"
               },
-              "value": "",
               "hint": {
                 "en": "IP address of the required KNX IP interface",
                 "nl": "IP adres van de KNX IP interface"
@@ -4008,7 +3988,7 @@
           "children": [
             {
               "id": "macAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface MAC address",
                 "nl": "Interface MAC adres",
@@ -4024,7 +4004,6 @@
                 "ko": "인터페이스 MAC 주소",
                 "ar": "عنوان MAC للواجهة"
               },
-              "value": "",
               "hint": {
                 "en": "MAC address of the required KNX IP interface",
                 "nl": "MAC adres van de KNX IP interface",
@@ -4043,7 +4022,7 @@
             },
             {
               "id": "ipAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface IP address",
                 "nl": "Interface IP adres",
@@ -4059,7 +4038,6 @@
                 "ko": "인터페이스 IP 주소",
                 "ar": "عنوان IP للواجهة"
               },
-              "value": "",
               "hint": {
                 "en": "IP address of the required KNX IP interface",
                 "nl": "IP adres van de KNX IP interface",
@@ -4210,7 +4188,7 @@
           "children": [
             {
               "id": "macAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface MAC address",
                 "nl": "Interface MAC adres",
@@ -4226,7 +4204,6 @@
                 "ko": "인터페이스 MAC 주소",
                 "ar": "عنوان MAC لواجهة"
               },
-              "value": "",
               "hint": {
                 "en": "MAC address of the required KNX IP interface",
                 "nl": "MAC adres van de KNX IP interface",
@@ -4245,7 +4222,7 @@
             },
             {
               "id": "ipAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface IP address",
                 "nl": "Interface IP adres",
@@ -4261,7 +4238,6 @@
                 "ko": "인터페이스 IP 주소",
                 "ar": "عنوان IP لواجهة"
               },
-              "value": "",
               "hint": {
                 "en": "IP address of the required KNX IP interface",
                 "nl": "IP adres van de KNX IP interface",
@@ -4468,7 +4444,7 @@
           "children": [
             {
               "id": "macAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface MAC address",
                 "nl": "Interface MAC adres",
@@ -4484,7 +4460,6 @@
                 "ko": "인터페이스 MAC 주소",
                 "ar": "عنوان MAC الواجهة"
               },
-              "value": "",
               "hint": {
                 "en": "MAC address of the required KNX IP interface",
                 "nl": "MAC adres van de KNX IP interface",
@@ -4503,7 +4478,7 @@
             },
             {
               "id": "ipAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface IP address",
                 "nl": "Interface IP adres",
@@ -4519,7 +4494,6 @@
                 "ko": "인터페이스 IP 주소",
                 "ar": "عنوان IP الواجهة"
               },
-              "value": "",
               "hint": {
                 "en": "IP address of the required KNX IP interface",
                 "nl": "IP adres van de KNX IP interface",
@@ -4671,7 +4645,7 @@
           "children": [
             {
               "id": "macAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface MAC address",
                 "nl": "Interface MAC adres",
@@ -4687,7 +4661,6 @@
                 "ko": "인터페이스 MAC 주소",
                 "ar": "عنوان MAC للواجهة"
               },
-              "value": "",
               "hint": {
                 "en": "MAC address of the required KNX IP interface",
                 "nl": "MAC adres van de KNX IP interface",
@@ -4706,7 +4679,7 @@
             },
             {
               "id": "ipAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface IP address",
                 "nl": "Interface IP adres",
@@ -4722,7 +4695,6 @@
                 "ko": "인터페이스 IP 주소",
                 "ar": "عنوان IP لواجهة"
               },
-              "value": "",
               "hint": {
                 "en": "IP address of the required KNX IP interface",
                 "nl": "IP adres van de KNX IP interface",
@@ -4874,7 +4846,7 @@
           "children": [
             {
               "id": "macAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface MAC address",
                 "nl": "Interface MAC adres",
@@ -4890,7 +4862,6 @@
                 "ko": "인터페이스 MAC 주소",
                 "ar": "عنوان MAC للواجهة"
               },
-              "value": "",
               "hint": {
                 "en": "MAC address of the required KNX IP interface",
                 "nl": "MAC adres van de KNX IP interface",
@@ -4909,7 +4880,7 @@
             },
             {
               "id": "ipAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface IP address",
                 "nl": "Interface IP adres",
@@ -4925,7 +4896,6 @@
                 "ko": "인터페이스 IP 주소",
                 "ar": "عنوان IP للواجهة"
               },
-              "value": "",
               "hint": {
                 "en": "IP address of the required KNX IP interface",
                 "nl": "IP adres van de KNX IP interface",
@@ -5370,7 +5340,7 @@
           "children": [
             {
               "id": "macAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface MAC address",
                 "nl": "Interface MAC adres",
@@ -5385,7 +5355,6 @@
                 "ru": "MAC-адрес интерфейса",
                 "ko": "인터페이스 MAC 주소"
               },
-              "value": "",
               "hint": {
                 "en": "MAC address of the required KNX IP interface",
                 "nl": "MAC adres van de KNX IP interface",
@@ -5403,7 +5372,7 @@
             },
             {
               "id": "ipAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface IP address",
                 "nl": "Interface IP adres",
@@ -5418,7 +5387,6 @@
                 "ru": "IP-адрес интерфейса",
                 "ko": "인터페이스 IP 주소"
               },
-              "value": "",
               "hint": {
                 "en": "IP address of the required KNX IP interface",
                 "nl": "IP adres van de KNX IP interface",
@@ -5707,7 +5675,7 @@
           "children": [
             {
               "id": "macAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface MAC address",
                 "nl": "Interface MAC adres",
@@ -5723,7 +5691,6 @@
                 "ko": "인터페이스 MAC 주소",
                 "ar": "عنوان MAC لواجهة"
               },
-              "value": "",
               "hint": {
                 "en": "MAC address of the required KNX IP interface",
                 "nl": "MAC adres van de KNX IP interface",
@@ -5742,7 +5709,7 @@
             },
             {
               "id": "ipAddress",
-              "type": "text",
+              "type": "label",
               "label": {
                 "en": "Interface IP address",
                 "nl": "Interface IP adres",
@@ -5758,7 +5725,6 @@
                 "ko": "인터페이스 IP 주소",
                 "ar": "عنوان IP للواجهة"
               },
-              "value": "",
               "hint": {
                 "en": "IP address of the required KNX IP interface",
                 "nl": "IP adres van de KNX IP interface",
